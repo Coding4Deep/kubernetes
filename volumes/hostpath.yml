@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: hostpath-deploy
+
+spec:
+  selector:
+    matchLabels:
+      app: hostpath
+  template:
+    metadata: 
+      name: hostpath-pod
+      labels:
+        app: hostpath
+    spec:
+      containers:
+        - name: hostpath-cont
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /mydata
+              name: hostpath-vol
+      volumes:
+        - name: hostpath-vol
+          hostPath: 
+            path: /hostpath-data
+      # nodeSelector:
+      #   kubernetes.io/hostname: worker2
+      # nodeSelector:
+      #   node: worker2
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key : node
+                    operator: In
+                    values:
+                      - worker1
+
+
+

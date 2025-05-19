@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-pod
+  labels:
+    app: nfs-pod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-pod
+  template:
+    metadata:
+      labels:
+        app: nfs-pod
+    spec:
+      containers:
+        - name: nfs-cont
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /mydata
+              name: nfs-test
+      volumes:
+        - name: nfs-test
+          nfs:
+            server: 192.168.56.20
+            path: /mnt/nfs

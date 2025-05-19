@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap
+
+data:
+  username: deepak
+  password: sagar
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pod
+
+spec: 
+  containers:
+    - name: config-cont
+      image: nginx
+      env:
+        - name: username
+          valueFrom:
+            configMapKeyRef:
+               name: configmap
+               key: username
+        - name: password
+          valueFrom:
+            configMapKeyRef:
+               name: configmap
+               key: password
+

@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring
+spec:
+  selector:
+    matchLabels:
+      app: springap
+  template:
+    metadata:
+      labels:
+        app: springap
+    spec:
+      containers:
+      - name: springap
+        image: sanchitraj5/docker-sp:1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_DB_HOSTNAME
+          value: mongosvc
+        - name: MONGO_DB_PASSWORD
+          value: mongo@123
+        - name: MONGO_DB_USERNAME
+          value: mongodb
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongoint
+spec:
+  selector:
+    app: springap
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: NodePort
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongoapp
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      name: myapp
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - name: mongocontainer
+          image: mongo:4.4
+          ports:
+            - containerPort: 27017
+          env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: mongodb
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            value: mongo@123
+          volumeMounts:
+            - name: mongodata
+              mountPath: /data/db
+      volumes:
+        - name: mongodata
+          persistentVolumeClaim:
+            claimName: mongopvc2
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongosvc
+spec:
+  selector:
+    app: mongo
+  ports:
+  - port: 27017
+    targetPort: 27017
+

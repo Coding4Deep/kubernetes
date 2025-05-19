@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-deploy
+  labels:
+    apps: tomcat-apps
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: tomcat-apps
+  template:
+    metadata:
+      name: tomcat-pod
+      labels:
+        apps: tomcat-apps
+    spec:
+      initContainers:
+        - name: tomcat-init
+          image: tomcat
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "cp -r /usr/local/tomcat/webapps.dist/* /webapps/"
+          volumeMounts:
+            - name: webapps-vol
+              mountPath: /webapps
+
+      containers:
+        - name: tomcat-cont 
+          image: tomcat
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: webapps-vol 
+              mountPath: /usr/local/tomcat/webapps
+
+            - name: tomcat-config
+              mountPath: /usr/local/tomcat/conf/tomcat-users.xml
+              subPath: tomcat-users.xml
+
+            - name: tomcat-config
+              mountPath: /usr/local/tomcat/webapps/manager/META-INF/context.xml
+              subPath: manager-META-INF-context.xml
+
+            - name: tomcat-config
+              mountPath: /usr/local/tomcat/webapps/host-manager/META-INF/context.xml
+              subPath: host-manager-META-INF-context.xml
+
+      volumes:
+        - name: webapps-vol
+          emptyDir: {}
+
+        - name: tomcat-config 
+          configMap:
+            name: tomcat-config
+            items:
+              - key: tomcat-users.xml 
+                path: tomcat-users.xml
+              - key: manager-META-INF-context.xml
+                path: manager-META-INF-context.xml
+              - key: host-manager-META-INF-context.xml
+                path: host-manager-META-INF-context.xml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    apps: tomcat-apps   
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30080
+  type: NodePort
+  
