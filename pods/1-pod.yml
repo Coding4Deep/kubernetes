@@ -1,0 +1,19 @@
+#Assign Memory and CPU Resources to Containers and Pods
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod01
+  labels:
+    app: app01
+spec:
+  containers:
+  - name: app01
+    image: nginx
+    resources:
+      limits:
+        cpu: 500m
+        memory: 500Mi
+      requests: 
+        cpu: 200m
+        memory: 500Mi

@@ -1,0 +1,22 @@
+#Configure Default Memory & cpu Requests and Limits for a Namespace  
+
+  apiVersion: v1
+  kind: LimitRange
+  metadata:
+    name: test
+    namespace: practice
+  spec:
+    limits:
+      - default:
+          cpu: 500m
+          memory: 500Mi
+        defaultRequest:
+          cpu: 400m
+          memory: 400Mi
+        max:
+          cpu: "1"
+          memory: "1Gi"
+        min:
+          cpu: 100m
+          memory: 100Mi
+        type: Container
