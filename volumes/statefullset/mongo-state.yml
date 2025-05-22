@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-set
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo
+  serviceName: mongo-svc
+ 
+  template:
+    metadata:
+      name: mongo
+      labels:
+        app: mongo
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mongo-cont
+          image: mongo:4.4
+          ports: 
+            - name: org-port
+              containerPort: 27017
+          command: ["mongod"]
+          args:
+            - "--replSet"
+            - "rs0"
+            - "--bind_ip_all"
+
+          volumeMounts:
+            - name: mongo-vol
+              mountPath:  /data/db
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-vol
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources: 
+          requests:
+            storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-svc
+spec:
+  ports:
+    - name: mongo-port
+      port: 27017
+      targetPort: 27017
+  clusterIP: None
+  selector:
+    app: mongo
+  type: ClusterIP
