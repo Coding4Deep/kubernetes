@@ -1,8 +1,4 @@
-Ah, got it! You want the **steps and commands to run inside the MongoDB pods themselves** after deployment — like how to initialize, check replica status, connect, and maybe do some basic MongoDB setup.
 
-Here’s a markdown snippet focusing **only on MongoDB pod internal commands and steps** to help you verify and manage MongoDB inside the pods:
-
-````markdown
 # MongoDB Commands Inside StatefulSet Pods
 
 After your MongoDB StatefulSet is deployed and running, you can interact with the MongoDB instances inside each pod as follows.
@@ -24,7 +20,7 @@ kubectl exec -it mongo-set-0 -- /bin/bash
 Once inside the pod, start the Mongo shell client:
 
 ```bash
-mongo
+mongo or mongosh
 ```
 
 You should see the MongoDB shell prompt:
@@ -35,7 +31,7 @@ You should see the MongoDB shell prompt:
 
 ---
 
-## 3. Basic MongoDB Commands
+## 3. Basic MongoDB Commands (OPTIONAL)
 
 * **Show databases:**
 
@@ -122,10 +118,3 @@ exit
 * Optional: initialize replica set if required for your setup
 
 ---
-
-If you want, I can also help create full Kubernetes manifests with replica set initialization included!
-
-```
-
-Would you like me to prepare that manifest or script for automating replica set init?
-```
