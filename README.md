@@ -103,7 +103,7 @@ To get started with the projects in this repository:
 For detailed instructions and explanations, refer to the following documents:
 
 * [NFS Provisioner Setup Guide](volumes/statefullset/NFS_PROVISIONER_README.md): Step-by-step instructions for setting up the NFS provisioner in your Kubernetes cluster.
-* [MongoDB StatefulSet Deployment](volumes/statefullset/mongo-statefulset.md): Guide on deploying MongoDB using a StatefulSet with persistent storage.
+* [MongoDB StatefulSet Deployment](volumes/statefullset/Mongo_Setup_README.md): Guide on deploying MongoDB using a StatefulSet with persistent storage.
 
 ## 🧹 Cleanup
 
