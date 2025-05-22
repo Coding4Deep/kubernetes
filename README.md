@@ -6,14 +6,11 @@
 ![Minikube](https://img.shields.io/badge/Minikube-38BDF8?style=for-the-badge&logo=minikube&logoColor=white)
 ![KIND](https://img.shields.io/badge/KIND-%23009639?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![Amazon EKS](https://img.shields.io/badge/Amazon%20EKS-232F3E?style=for-the-badge&logo=amazon-eks&logoColor=white)
-![Google Kubernetes Engine](https://img.shields.io/badge/GKE-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
-![Azure AKS](https://img.shields.io/badge/Azure%20AKS-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
 ![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=helm&logoColor=white)
 ![Argo CD](https://img.shields.io/badge/Argo%20CD-EF7B4D?style=for-the-badge&logo=argo&logoColor=white)
 ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
 ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
 ![Calico](https://img.shields.io/badge/Calico-00B5CC?style=for-the-badge&logo=linuxfoundation&logoColor=white)
-![Cilium](https://img.shields.io/badge/Cilium-0086D4?style=for-the-badge&logo=cilium&logoColor=white)
 ---
 
 # Kubernetes projects & tutorial
