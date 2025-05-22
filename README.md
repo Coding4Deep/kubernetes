@@ -1,0 +1,141 @@
+
+---
+
+# Kubernetes Projects by Coding4Deep
+
+Welcome to the **Kubernetes Projects** repository by Coding4Deep. This collection showcases various Kubernetes configurations, deployments, and best practices aimed at simplifying container orchestration and enhancing cloud-native application management.
+
+## 🚀 Overview
+
+This repository serves as a practical resource for developers and DevOps enthusiasts looking to:
+
+* Understand Kubernetes concepts through hands-on examples.
+* Deploy and manage applications using Kubernetes resources.
+* Implement persistent storage solutions like NFS provisioners.
+* Scale applications efficiently within a Kubernetes cluster.
+
+
+## 🛠️ Technologies Used
+
+* **Kubernetes**: Container orchestration platform for automating application deployment, scaling, and management.
+* **YAML**: Markup language used for configuration files.
+* **Docker**: Platform for developing, shipping, and running applications in containers.
+* **NFS**: Network File System for providing shared storage solutions.
+
+## 📚 Getting Started
+
+To get started with the projects in this repository:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Coding4Deep/kubernetes.git
+   cd kubernetes
+   ```
+
+2. Navigate to the desired directory (e.g., `volumes/`) and apply the Kubernetes configurations:
+
+   ```bash
+   kubectl apply -f .
+   ```
+
+3. Follow the specific instructions in each directory's README file for detailed setup and usage.
+
+## 🔍 Usage Examples
+
+### Deploying a MongoDB StatefulSet with Persistent Storage
+
+1. Navigate to the `volumes/` directory:
+
+   ```bash
+   cd volumes/
+   ```
+
+2. Apply the StatefulSet and service configurations:
+
+   ```bash
+   kubectl apply -f mongo-statefulset.yaml
+   kubectl apply -f mongo-service.yaml
+   ```
+
+3. Verify the deployment:
+
+   ```bash
+   kubectl get pods -l app=mongo
+   kubectl get pvc
+   ```
+
+4. Access the MongoDB shell:
+
+   ```bash
+   kubectl exec -it mongo-set-0 -- mongo
+   ```
+
+### Setting Up an NFS Provisioner
+
+1. Navigate to the `volumes/` directory:
+
+   ```bash
+   cd volumes/
+   ```
+
+2. Apply the NFS provisioner configurations:
+
+   ```bash
+   kubectl apply -f nfs-provisioner.yaml
+   ```
+
+3. Verify the deployment:
+
+   ```bash
+   kubectl get pods -l app=nfs-provisioner
+   kubectl get storageclass
+   ```
+
+4. Create a PersistentVolumeClaim using the NFS provisioner:
+
+   ```bash
+   kubectl apply -f pvc-nfs.yaml
+   ```
+
+## 📄 Documentation
+
+For detailed instructions and explanations, refer to the following documents:
+
+* [NFS Provisioner Setup Guide](volumes/NFS_PROVISIONER_README.md): Step-by-step instructions for setting up the NFS provisioner in your Kubernetes cluster.
+* [MongoDB StatefulSet Deployment](volumes/mongo-statefulset.md): Guide on deploying MongoDB using a StatefulSet with persistent storage.
+
+## 🧹 Cleanup
+
+To remove the deployed resources:
+
+1. Delete the StatefulSet and service:
+
+   ```bash
+   kubectl delete -f mongo-statefulset.yaml
+   kubectl delete -f mongo-service.yaml
+   ```
+
+2. Delete the NFS provisioner:
+
+   ```bash
+   kubectl delete -f nfs-provisioner.yaml
+   ```
+
+3. Delete the PersistentVolumeClaim:
+
+   ```bash
+   kubectl delete -f pvc-nfs.yaml
+   ```
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have improvements, bug fixes, or new examples to add, please fork the repository and submit a pull request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Feel free to customize this `README.md` further to align with any additional projects or specific configurations you have in your repository.
