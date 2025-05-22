@@ -2,7 +2,7 @@ Got it! I'll prepare a full, clean, and well-structured GitHub-style `README.md`
 
 I'll write it in a single copy-paste friendly format for easy editing and usage. Give me a moment.
 
-```markdown
+
 # MongoDB StatefulSet Setup on Kubernetes
 
 This guide walks you through the complete process of deploying a **MongoDB StatefulSet** on Kubernetes with persistent storage using `PersistentVolumeClaims` (PVCs). It covers everything from initial setup, storage configuration, deployment, verification, and cleanup.
