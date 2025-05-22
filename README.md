@@ -38,7 +38,7 @@ sudo chmod -R 777 /mnt/nfs_share
 Edit the exports file:
 
 ```bash
-sudo nano /etc/exports
+sudo vi /etc/exports
 ```
 
 Add this line (you can restrict `*` to specific CIDRs):
