@@ -16,9 +16,9 @@
 ![Cilium](https://img.shields.io/badge/Cilium-0086D4?style=for-the-badge&logo=cilium&logoColor=white)
 ---
 
-# Kubernetes Projects by Coding4Deep
+# Kubernetes projects & tutorial
 
-Welcome to the **Kubernetes Projects** repository by Coding4Deep. This collection showcases various Kubernetes configurations, deployments, and best practices aimed at simplifying container orchestration and enhancing cloud-native application management.
+Welcome to the **Kubernetes** repository by Coding4Deep. This collection showcases various Kubernetes configurations, deployments, and best practices aimed at simplifying container orchestration and enhancing cloud-native application management.
 
 ## 🚀 Overview
 
