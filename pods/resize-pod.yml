@@ -1,0 +1,16 @@
+# how to change the CPU and memory resource requests and
+# limits assigned to a container without recreating the Pod.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resize-pod
+  labels:
+    app: resize-pod
+spec:
+  containers:
+    - name: resize-container
+      image: deepaksag/nodejs-calci:1.0.0
+      ports:
+        - containerPort: 3000
+      resources:

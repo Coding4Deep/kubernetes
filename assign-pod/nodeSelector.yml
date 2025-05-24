@@ -14,7 +14,7 @@ spec:
       labels:
          pod: affi-po
     spec:
-      nodeName: worker2
+      # restartPolicy: Always
       containers:
       - name: cont-01
         image: nginx
@@ -31,3 +31,5 @@ spec:
         #     cpu: 200m
         #     memory: 200Mi
         
+      nodeSelector:
+        kubernetes.io/hostname: worker1
