@@ -1,4 +1,5 @@
-
+<div align="center">
+   
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![kubectl](https://img.shields.io/badge/kubectl-326CE5?style=for-the-badge&logo=powerbi&logoColor=white)
@@ -12,6 +13,8 @@
 ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
 ![Calico](https://img.shields.io/badge/Calico-00B5CC?style=for-the-badge&logo=linuxfoundation&logoColor=white)
 ---
+
+</div>
 
 # Kubernetes projects & tutorial
 
