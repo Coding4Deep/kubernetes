@@ -1,0 +1,139 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: webchatapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+        app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - image: deepaksag/devchat:backend-v1
+          name: backend-cont
+          ports:
+            containerPort: 5000
+          env:
+            NODE_ENV: development
+            DATABASE_URL: postgresql://postgres:postgres@localhost:5432/repl_express            
+            RABBITMQ_USERNAME: admin
+            RABBITMQ_PASSWORD: admin
+            REDIS_URL: redis://localhost:6379
+            RABBITMQ_URL: amqp://admin:admin@localhost:5672
+            SESSION_SECRET: eW91ci1zdXBlci1zZWNyZXQtc2Vzc2lvbi1rZXk=   
+         readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 5000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+          successThreshold: 1
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+          successThreshold: 1
+    
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: WebChatApp
+  selector:
+    app: backend
+  ports:
+  - port: 5000
+    targetPort: 5000
+---
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend 
+  namespace: WebChatApp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+        app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+       initContainers:
+      - name: wait-for-backend
+        image: busybox
+        command: ['sh', '-c', 'until nc -z backend 5000; do echo waiting for backend; sleep 2; done;']
+        
+      containers:
+        - images: deepaksag/devchat:frontend-v1
+          name: frontend-cont
+          ports:
+            containerPorts: 80
+         readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+          successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 10
+          successThreshold: 1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: webchatapp
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend
+  ports:
+  - port: 80
+    targetPort: 80
+          
+ 
