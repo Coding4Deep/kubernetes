@@ -154,6 +154,17 @@ provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 ```
 
+## If  **AWS was not able to validate the provided access credentials** Error occur
+
+```yaml
+
+kubectl annotate serviceaccount \
+  ebs-csi-controller-sa \
+  -n kube-system \
+  eks.amazonaws.com/role-arn=arn:aws:iam::954976312227:role/AmazonEKS_EBS_CSI_DriverRole \
+  --overwrite
+```
+
 ---
 
 ## 📚 Additional Resources
@@ -164,6 +175,7 @@ volumeBindingMode: WaitForFirstConsumer
 * [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)
 
 ---
+
 
 ## ✅ Summary
 
