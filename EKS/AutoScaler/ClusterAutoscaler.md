@@ -294,7 +294,6 @@ spec:
             - --stderrthreshold=info
             - --cloud-provider=aws
             - --expander=least-waste
-            - --node-group-auto-discovery=asg:tag=kubernetes.io/cluster/<cluster-name>
             - --balance-similar-node-groups
             - --skip-nodes-with-system-pods=false
             - --skip-nodes-with-local-storage=false
